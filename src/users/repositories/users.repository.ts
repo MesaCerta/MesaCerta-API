@@ -32,7 +32,7 @@ export class UsersRepository {
   }
 
   async findAll() {
-    return this.prisma.user.findMany({
+    const users = await this.prisma.user.findMany({
       include: {
         reviewsRestaurant: {
           select: {
@@ -77,12 +77,21 @@ export class UsersRepository {
             },
           },
         },
+        restaurants: true,
       },
     });
+
+    return users.map((user) => ({
+      ...user,
+      restaurants: user.restaurants.map((restaurant) => ({
+        ...restaurant,
+        schedule: JSON.parse(restaurant.schedule as unknown as string),
+      })),
+    }));
   }
 
   async findOne(id: string) {
-    return this.prisma.user.findUnique({
+    const user = await this.prisma.user.findUnique({
       where: { id },
       include: {
         reviewsRestaurant: {
@@ -109,6 +118,7 @@ export class UsersRepository {
             },
           },
         },
+        restaurants: true,
         reviewsDish: {
           select: {
             id: true,
@@ -127,10 +137,22 @@ export class UsersRepository {
         },
       },
     });
+
+    if (!user) {
+      return null;
+    }
+
+    return {
+      ...user,
+      restaurants: user.restaurants.map((restaurant) => ({
+        ...restaurant,
+        schedule: JSON.parse(restaurant.schedule as unknown as string),
+      })),
+    };
   }
 
   async findByEmail(email: string) {
-    return this.prisma.user.findUnique({
+    const user = await this.prisma.user.findUnique({
       where: { email },
       include: {
         reviewsRestaurant: {
@@ -174,11 +196,25 @@ export class UsersRepository {
             },
           },
         },
+        restaurants: true,
       },
     });
+
+    if (!user) {
+      return null;
+    }
+
+    return {
+      ...user,
+      restaurants: user.restaurants.map((restaurant) => ({
+        ...restaurant,
+        schedule: JSON.parse(restaurant.schedule as unknown as string),
+      })),
+    };
   }
+
   async findByCpf(cpf: string) {
-    return this.prisma.user.findUnique({
+    const user = await this.prisma.user.findUnique({
       where: { cpf },
       include: {
         reviewsRestaurant: {
@@ -222,12 +258,25 @@ export class UsersRepository {
             },
           },
         },
+        restaurants: true,
       },
     });
+
+    if (!user) {
+      return null;
+    }
+
+    return {
+      ...user,
+      restaurants: user.restaurants.map((restaurant) => ({
+        ...restaurant,
+        schedule: JSON.parse(restaurant.schedule as unknown as string),
+      })),
+    };
   }
 
   async remove(id: string) {
-    return this.prisma.user.delete({
+    const user = await this.prisma.user.findUnique({
       where: { id },
       include: {
         reviewsRestaurant: {
@@ -250,11 +299,29 @@ export class UsersRepository {
                 name: true,
                 address: true,
                 phone: true,
+                schedule: true,
               },
             },
           },
         },
+        restaurants: true,
       },
     });
+
+    if (!user) {
+      return null;
+    }
+
+    const formattedUser = {
+      ...user,
+      restaurants: user.restaurants.map((restaurant) => ({
+        ...restaurant,
+        schedule: JSON.parse(restaurant.schedule as unknown as string),
+      })),
+    };
+
+    await this.prisma.user.delete({ where: { id } });
+
+    return formattedUser;
   }
 }
