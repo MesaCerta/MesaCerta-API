@@ -1,0 +1,95 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Sex {
+  Male
+  Female
+  Other
+}
+
+model User {
+  id                  String      @id @default(uuid())
+  name                String
+  email               String      @unique
+  password            String
+  cpf                 String      @unique
+  image               String?
+  sex                 Sex?      
+  address             String
+  phone               String
+  birthdate           DateTime    
+  createdAt           DateTime    @default(now())
+  updatedAt           DateTime    @updatedAt
+  reviewsRestaurant   ReviewRestaurant[]    // Relação de 1 para N (1 usuário pode ter várias avaliações)
+  reviewsDish         ReviewDish[]          // Relação de 1 para N (1 usuário pode ter várias avaliações)
+  restaurants         Restaurant[] @relation("UserRestaurants") // Um usuário pode ter vários restaurantes
+  @@map("users")
+}
+
+model Restaurant {
+  id          String      @id @default(uuid())
+  name        String
+  address     String
+  phone       String      @unique
+  cnpj        String      @unique
+  image       String?
+  instagram   String?
+  schedule    Json                  // JSON contendo os horários de funcionamento por dia da semana    
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  reviews     ReviewRestaurant[]    // Relação de 1 para N (1 restaurante pode ter várias avaliações)
+  dishes      Dish[]                // Relacionamento com o modelo Dish
+  ownerId     String      @unique
+  owner       User        @relation("UserRestaurants", fields: [ownerId], references: [id], onDelete: Cascade) // Relacionamento com User
+  @@map("restaurants")
+}
+
+model Dish {
+  id           String       @id @default(uuid())
+  name         String
+  description  String
+  price        Float
+  image        String?
+  restaurantId String
+  mealType     String 
+  restaurant   Restaurant   @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+  reviews      ReviewDish[]    // Relação de 1 para N (1 usuário pode ter várias avaliações)
+  @@map("dishes")
+}
+
+
+model ReviewRestaurant {
+  id           String       @id @default(uuid())
+  rating       Int 
+  description  String
+  user         User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId       String
+  restaurant   Restaurant   @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
+  restaurantId String
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+  @@map("reviewsRestaurants")
+}
+
+model ReviewDish {
+  id           String      @id @default(uuid())
+  rating       Int 
+  description  String
+  user         User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId       String
+  dish         Dish        @relation(fields: [dishId], references: [id], onDelete: Cascade)
+  dishId       String
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+  @@map("reviewsDishes")
+}
+
+
