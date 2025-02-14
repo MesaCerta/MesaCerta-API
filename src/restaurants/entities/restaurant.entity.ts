@@ -4,7 +4,6 @@ export class RestaurantEntity implements Restaurant {
   id: string;
   name: string;
   image: string;
-  instagram: string;
   address: string;
   phone: string;
   ownerId: string;

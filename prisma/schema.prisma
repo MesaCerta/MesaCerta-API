@@ -39,7 +39,6 @@ model Restaurant {
   phone       String      @unique
   cnpj        String      @unique
   image       String?
-  instagram   String?
   schedule    Json                  // JSON contendo os horários de funcionamento por dia da semana    
   createdAt   DateTime    @default(now())
   updatedAt   DateTime    @updatedAt

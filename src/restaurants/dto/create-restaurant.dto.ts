@@ -73,11 +73,6 @@ export class CreateRestaurantDto {
   @ApiProperty({ description: 'Imagem do restaurante.' })
   image: string;
 
-  @IsString({ message: 'Instagram do restaurante tem que ser do tipo string' })
-  @IsOptional({ message: 'Instagram do restaurante é opcional' })
-  @ApiProperty({ description: 'Instagram do restaurante.' })
-  instagram: string;
-
   @IsArray({ message: 'O horário de funcionamento deve ser um array.' })
   @ArrayNotEmpty({ message: 'Deve haver pelo menos um dia de funcionamento.' })
   @ValidateNested({ each: true })
