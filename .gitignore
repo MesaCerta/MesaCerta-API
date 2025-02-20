@@ -4,6 +4,7 @@
 /build
 
 /prisma/migrations
+src/storage
 
 # Logs
 logs
