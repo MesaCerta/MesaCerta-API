@@ -56,6 +56,22 @@ export class ReviewsRestaurantService {
     return review;
   }
 
+  async findByRestaurantId(restaurantId: string): Promise<ReviewRestaurantEntity[]> {
+    const isRestaurantExist = await this.restRepository.findOne(restaurantId);
+    
+    if (!isRestaurantExist) {
+      throw new NotFoundError('Restaurante não encontrado.');
+    }
+    
+    const reviews = await this.repository.findAllByRestaurantId(restaurantId);
+    
+    if (reviews.length === 0) {
+      throw new NotFoundError('Nenhuma avaliação encontrada para este restaurante.');
+    }
+    
+    return reviews;
+  }
+
   async getAverageRating(restaurantId: string) {
     const reviews = await this.repository.findAllByRestaurantId(restaurantId);
     const totalReviews = reviews.length;

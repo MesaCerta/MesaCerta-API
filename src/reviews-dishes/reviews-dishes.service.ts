@@ -50,6 +50,22 @@ export class ReviewsDishesService {
     return review;
   }
 
+  async findByDishId(dishId: string): Promise<ReviewsDishEntity[]> {
+    const isDishExist = await this.dishesRepository.findOne(dishId);
+    
+    if (!isDishExist) {
+      throw new NotFoundError('Prato não encontrado.');
+    }
+    
+    const reviews = await this.repository.findAllByDishId(dishId);
+    
+    if (reviews.length === 0) {
+      throw new NotFoundError('Nenhuma avaliação encontrada para este prato.');
+    }
+    
+    return reviews;
+  }
+
   async getAverageRating(dishId: string) {
     const reviews = await this.repository.findAllByDishId(dishId);
     const totalReviews = reviews.length;

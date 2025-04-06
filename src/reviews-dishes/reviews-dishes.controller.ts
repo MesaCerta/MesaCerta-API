@@ -30,6 +30,11 @@ export class ReviewsDishesController {
     return this.reviewsDishesService.findAll();
   }
 
+  @Get('dish/:dishId')
+  findByDish(@Param('dishId') dishId: string) {
+    return this.reviewsDishesService.findByDishId(dishId);
+  }
+
   @Get(':id')
   @UseGuards(AuthGuard)
   findOne(@Param('id') id: string) {

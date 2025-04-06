@@ -32,8 +32,12 @@ export class ReviewsRestaurantController {
     return this.reviewsRestaurantService.findAll();
   }
 
+  @Get('restaurant/:restaurantId')
+  findByRestaurant(@Param('restaurantId') restaurantId: string) {
+    return this.reviewsRestaurantService.findByRestaurantId(restaurantId);
+  }
+
   @Get(':id')
-  @UseGuards(AuthGuard)
   findOne(@Param('id') id: string) {
     return this.reviewsRestaurantService.findOne(id);
   }
