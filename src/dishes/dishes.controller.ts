@@ -25,6 +25,11 @@ export class DishesController {
     return this.dishesService.create(createDishDto);
   }
 
+  @Get('restaurant/:restaurantId')
+  findByRestaurant(@Param('restaurantId') restaurantId: string) {
+    return this.dishesService.findByRestaurantId(restaurantId);
+  }
+
   @Get()
   findAll() {
     return this.dishesService.findAll();

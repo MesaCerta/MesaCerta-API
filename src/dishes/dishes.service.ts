@@ -31,6 +31,23 @@ export class DishesService {
     return this.repository.create(createDishDto);
   }
 
+  async findByRestaurantId(restaurantId: string): Promise<DishEntity[]> {
+    const isRestaurantExist =
+      await this.restaurantRespository.findOne(restaurantId);
+
+    if (!isRestaurantExist) {
+      throw new NotFoundError('Restaurante não encontrado.');
+    }
+
+    const dishes = await this.repository.findByRestaurantId(restaurantId);
+
+    if (dishes.length === 0) {
+      throw new NotFoundError('Nenhum prato encontrado para este restaurante.');
+    }
+
+    return dishes;
+  }
+
   async findAll(): Promise<DishEntity[]> {
     const dishes = await this.repository.findAll();
     if (dishes.length === 0) {
