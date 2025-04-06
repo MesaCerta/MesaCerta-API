@@ -22,7 +22,6 @@ export class ReviewsRestaurantController {
   ) {}
 
   @Post()
-  @UseGuards(AuthGuard)
   create(@Body() createReviewRestaurantDto: CreateReviewRestaurantDto) {
     return this.reviewsRestaurantService.create(createReviewRestaurantDto);
   }

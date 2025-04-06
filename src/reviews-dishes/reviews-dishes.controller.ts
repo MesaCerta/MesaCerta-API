@@ -20,7 +20,6 @@ export class ReviewsDishesController {
   constructor(private readonly reviewsDishesService: ReviewsDishesService) {}
 
   @Post()
-  @UseGuards(AuthGuard)
   create(@Body() createReviewsDishDto: CreateReviewsDishDto) {
     return this.reviewsDishesService.create(createReviewsDishDto);
   }
