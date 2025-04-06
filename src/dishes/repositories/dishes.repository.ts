@@ -59,6 +59,30 @@ export class DishesRepository {
     });
   }
 
+  async findByRestaurantId(restaurantId: string): Promise<DishEntity[]> {
+    return this.prisma.dish.findMany({
+      where: { restaurantId },
+      include: {
+        reviews: {
+          select: {
+            id: true,
+            rating: true,
+            description: true,
+            createdAt: true,
+            updatedAt: true,
+            user: {
+              select: {
+                id: true,
+                name: true,
+                email: true,
+              },
+            },
+          },
+        },
+      },
+    });
+  }
+
   async update(id: string, updateDishDto: UpdateDishDto): Promise<DishEntity> {
     return this.prisma.dish.update({
       where: { id },
