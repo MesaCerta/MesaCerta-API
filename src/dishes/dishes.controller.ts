@@ -20,13 +20,12 @@ export class DishesController {
   constructor(private readonly dishesService: DishesService) {}
 
   @Post()
-  @UseGuards(AuthGuard)
   create(@Body() createDishDto: CreateDishDto) {
     return this.dishesService.create(createDishDto);
   }
 
   @Get('restaurant/:restaurantId')
-  findByRestaurant(@Param('restaurantId') restaurantId: string) { 
+  findByRestaurant(@Param('restaurantId') restaurantId: string) {
     return this.dishesService.findByRestaurantId(restaurantId);
   }
 
