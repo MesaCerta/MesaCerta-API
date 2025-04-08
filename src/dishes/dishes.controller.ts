@@ -40,7 +40,6 @@ export class DishesController {
   }
 
   @Patch(':id')
-  @UseGuards(AuthGuard)
   update(@Param('id') id: string, @Body() updateDishDto: UpdateDishDto) {
     return this.dishesService.update(id, updateDishDto);
   }

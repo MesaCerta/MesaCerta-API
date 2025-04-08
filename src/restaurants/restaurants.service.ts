@@ -1,4 +1,4 @@
-import { forwardRef, Inject, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { CreateRestaurantDto } from './dto/create-restaurant.dto';
 import { UpdateRestaurantDto } from './dto/update-restaurant.dto';
 import { RestaurantsRepository } from './repositories/restaurants.repository';
@@ -6,7 +6,6 @@ import { ConflictError } from 'src/common/errors/types/ConflictError';
 import { NotFoundError } from 'src/common/errors/types/NotFoundError';
 import { RestaurantEntity } from './entities/restaurant.entity';
 import { UsersRepository } from 'src/users/repositories/users.repository';
-import { UsersService } from 'src/users/users.service';
 
 @Injectable()
 export class RestaurantsService {
