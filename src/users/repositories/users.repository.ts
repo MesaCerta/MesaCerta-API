@@ -26,7 +26,6 @@ export class UsersRepository {
       where: { id },
       data: {
         ...updateUserDto,
-        birthdate: this.formatDate(updateUserDto.birthdate),
       },
     });
   }
