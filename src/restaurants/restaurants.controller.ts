@@ -35,7 +35,6 @@ export class RestaurantsController {
   }
 
   @Patch(':id')
-  @UseGuards(AuthGuard)
   update(
     @Param('id') id: string,
     @Body() updateRestaurantDto: UpdateRestaurantDto,
