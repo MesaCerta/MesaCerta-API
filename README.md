@@ -89,7 +89,7 @@ JWT_SECRET=anything
 
 <div style="display: flex; align-items: center; gap: 4px;">
   <span style="font-size: 30px; vertical-align: middle;">🌐</span>
-  <h2 style="margin: 5; line-height: 1;">Como utilizar o Insomnia</h2>
+  <h2 style="margin: 0; line-height: 1;">Como utilizar o Insomnia</h2>
 </div>
 
 <ol>
