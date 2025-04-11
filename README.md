@@ -87,10 +87,7 @@ DATABASE_URL="postgresql://user:password@localhost:5432/database"
 JWT_SECRET=anything
 ```
 
-<div style="display: flex; align-items: center; gap: 4px;">
-  <span style="font-size: 30px; vertical-align: middle;">🌐</span>
-  <h2 style="margin: 0; line-height: 1;">Como utilizar o Insomnia</h2>
-</div>
+## 🌐 Como utilizar o Insomnia
 
 <ol>
   <li>Baixe o Insomnia em <a href="https://insomnia.rest/download" target="_blank">https://insomnia.rest/download</a>.</li>
