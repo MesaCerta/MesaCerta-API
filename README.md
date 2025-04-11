@@ -37,12 +37,12 @@ Outra funcionalidade essencial é a possibilidade de **agendar horários** de fo
 
 <h3><a href = "https://nestjs.com/">Nest.js</a></h3>
 <ul>
-   <li>Versão: 11.0.15</li>
+   <li>Versão: 10.0.0</li>
 </ul>
 
 <h3><a href = "https://www.prisma.io/">Prisma ORM</a></h3>
 <ul>
-   <li>Versão: 6.6.0</li>
+   <li>Versão: 5.18.0</li>
 </ul>
 
 <h3><a href = "https://www.postgresql.org/">PostgreSQL</a></h3>
