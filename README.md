@@ -30,6 +30,11 @@ Outra funcionalidade essencial é a possibilidade de **agendar horários** de fo
 <h1>Tecnologias Usadas:</h1>
 
 
+<h3><a href = "https://www.typescriptlang.org/">TypeScript</a></h3>
+<ul>
+   <li>Versão: 5.8.3</li>
+</ul>
+
 <h3><a href = "https://nestjs.com/">Nest.js</a></h3>
 <ul>
    <li>Versão: 11.0.15</li>
@@ -82,7 +87,11 @@ DATABASE_URL="postgresql://user:password@localhost:5432/database"
 JWT_SECRET=anything
 ```
 
-<h2>Como utilizar o Insomnia</h2>
+<div style="display: flex; align-items: center; gap: 4px;">
+  <span style="font-size: 30px; vertical-align: middle;">🌐</span>
+  <h2 style="margin: 5; line-height: 1;">Como utilizar o Insomnia</h2>
+</div>
+
 <ol>
   <li>Baixe o Insomnia em <a href="https://insomnia.rest/download" target="_blank">https://insomnia.rest/download</a>.</li>
   <li>Importe no Insomnia o arquivo localizado em: MesaCerta-API\src\storage\mesa-certa-api.txt</li>
