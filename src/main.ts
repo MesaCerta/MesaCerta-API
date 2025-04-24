@@ -12,7 +12,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   app.enableCors({
-    origin: 'http://localhost:5173', // Permitir apenas solicitações do frontend local
+    origin: ['http://localhost:5173', 'https://mesacerta-front.onrender.com'],
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
   });
